@@ -1,87 +1,89 @@
-# 🛡️ ThreatSentinel — AI-Powered Cybersecurity Threat Detection
+# Network Intrusion Detection System
 
-> An end-to-end ML system for detecting cybersecurity threats from network traffic data, featuring a real-time Streamlit dashboard with model evaluation and explainable insights.
+A machine learning–based intrusion detection system for analyzing network traffic and classifying normal and malicious connections.
 
----
-
-## 🚀 Live Demo
-[ThreatSentinel on Replit](https://replit.com/@shreyalankaaa/ThreatSentinel)
+The project provides an end-to-end workflow for preprocessing network traffic data, training multiple machine learning models, evaluating performance, and serving predictions through an interactive dashboard.
 
 ---
 
-## 📌 What It Does
+## Features
 
-ThreatSentinel ingests network traffic data, engineers security-relevant features, trains multiple ML classifiers, and surfaces threat predictions through an interactive dashboard — giving security analysts real-time visibility into potential intrusions.
-
----
-
-## 🧠 How It Works
-
-```
-Raw Network Data → Dataset Loader → Feature Engineering → Model Training → Evaluation → Streamlit Dashboard
-```
-
-1. **Dataset Loader** (`dataset_loader.py`) — ingests and parses raw network traffic datasets
-2. **Data Processor** (`data_processor.py`) — cleans, normalises, and prepares data for ML
-3. **Feature Engineer** (`feature_engineer.py`) — extracts security-relevant signals from traffic patterns
-4. **Model Trainer** (`model_trainer.py`) — trains classifiers (Random Forest, XGBoost, etc.)
-5. **Model Evaluator** (`model_evaluator.py`) — generates accuracy, precision, recall, F1, confusion matrix
-6. **Predictor** (`predictor.py`) — serves real-time threat classifications
-7. **Dashboard** (`app.py`) — Streamlit UI with live charts, metrics, and predictions
+- Data preprocessing pipeline
+- Multiple machine learning classifiers
+- Interactive Streamlit dashboard
+- Model comparison
+- Performance evaluation
+- Single-record prediction
+- Model persistence
+- Exportable evaluation metrics
 
 ---
 
-## 📊 Model Performance
+## Tech Stack
 
-| Metric | Score |
-|--------|-------|
-| Accuracy | XX% |
-| Precision | XX% |
-| Recall | XX% |
-| F1 Score | XX% |
-| Dataset | Network intrusion traffic data |
+Python
 
-> Replace XX with your actual scores from model_evaluator.py output.
+Scikit-learn
 
----
+Pandas
 
-## ⚙️ Tech Stack
+NumPy
 
-- **ML:** Python, Scikit-learn, Pandas, NumPy
-- **Dashboard:** Streamlit, Plotly
-- **Feature Engineering:** Custom network traffic parsers
-- **Deployment:** Replit
+Streamlit
+
+Matplotlib
+
+Plotly
+
+Joblib
 
 ---
 
-## 🗂️ Project Structure
+## Workflow
 
-```
-CyberSecurity-threat-detection/
-├── app.py                 # Streamlit dashboard entry point
-├── dataset_loader.py      # Data ingestion and parsing
-├── data_processor.py      # Cleaning and normalisation
-├── feature_engineer.py    # Security feature extraction
-├── model_trainer.py       # ML model training
-├── model_evaluator.py     # Performance evaluation
-├── predictor.py           # Real-time prediction engine
-└── utils.py               # Shared helper functions
-```
+Dataset
+
+↓
+
+Preprocessing
+
+↓
+
+Feature Engineering
+
+↓
+
+Model Training
+
+↓
+
+Evaluation
+
+↓
+
+Prediction Dashboard
 
 ---
 
-## ▶️ Run Locally
+## Repository Structure
 
-```bash
-git clone https://github.com/shreyaaaalankaaa/CyberSecurity-threat-detection
-cd CyberSecurity-threat-detection
-pip install -r requirements.txt
-streamlit run app.py
-```
+...
 
 ---
 
-## 👩‍💻 Author
+## Installation
 
-**Shreya Lanka** — B.Tech Cybersecurity, Sri Indu College of Engineering & Technology  
-[LinkedIn](https://www.linkedin.com/in/shreya-lanka-057a0b28a/) • [GitHub](https://github.com/shreyaaaalankaaa)
+...
+
+---
+
+## Future Improvements
+
+- Real-time packet capture
+- FastAPI deployment
+- Docker support
+- Explainable AI
+- Additional intrusion datasets
+
+[LinkedIn](https://www.linkedin.com/in/shreya-lanka-057a0b28a/) 
+[GitHub](https://github.com/shreyaaaalankaaa)
