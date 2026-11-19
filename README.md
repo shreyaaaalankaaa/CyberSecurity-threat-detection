@@ -3,6 +3,7 @@
 A reproducible machine-learning project for classifying network connections as normal or potentially malicious. The repository includes data validation, categorical preprocessing, model comparison, local inference, an interactive Streamlit dashboard, and a FastAPI prediction service.
 
 The built-in dataset is synthetic and is provided so the full workflow can be run without downloading external files. It should not be treated as a benchmark result. For formal evaluation, upload a compatible dataset derived from NSL-KDD, UNSW-NB15, CICIDS, or another documented intrusion-detection dataset.
+**Live demo:** https://cybersecurity-threat-detection-8ytmyidxcahn39akygpdvq.streamlit.app/
 
 ## Screenshots
 
