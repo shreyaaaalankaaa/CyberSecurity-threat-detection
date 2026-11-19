@@ -1,6 +1,8 @@
 from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict
+
 from src.data import FEATURE_COLUMNS
 from src.inference import predict_record
 from src.modeling import load_model
@@ -31,6 +33,18 @@ class TrafficRecord(BaseModel):
     dst_host_count: int
     dst_host_srv_count: int
 
+_cache: dict[str, object] = {"mtime": None, "artifact": None}
+
+
+def _artifact() -> dict:
+    """Load the model once and reload only when the file changes (not on every request)."""
+    mtime = MODEL_PATH.stat().st_mtime
+    if _cache["mtime"] != mtime:
+        _cache["artifact"] = load_model(MODEL_PATH)
+        _cache["mtime"] = mtime
+    return _cache["artifact"]  # type: ignore[return-value]
+
+
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok", "model_ready": MODEL_PATH.exists()}
@@ -39,7 +53,7 @@ def health() -> dict:
 def model_info() -> dict:
     if not MODEL_PATH.exists():
         raise HTTPException(503, "Model not trained. Run python train.py first.")
-    artifact = load_model(MODEL_PATH)
+    artifact = _artifact()
     return {"model_name": artifact["model_name"], "metrics": artifact["metrics"], "features": FEATURE_COLUMNS}
 
 @app.post("/predict")
@@ -47,6 +61,6 @@ def predict(payload: TrafficRecord) -> dict:
     if not MODEL_PATH.exists():
         raise HTTPException(503, "Model not trained. Run python train.py first.")
     try:
-        return predict_record(load_model(MODEL_PATH)["pipeline"], payload.model_dump())
+        return predict_record(_artifact()["pipeline"], payload.model_dump())
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc

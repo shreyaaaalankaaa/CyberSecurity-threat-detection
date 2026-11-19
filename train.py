@@ -1,7 +1,8 @@
-from pathlib import Path
 import json
+from pathlib import Path
+
 from src.data import generate_demo_dataset, validate_dataset
-from src.modeling import train_and_compare, save_model
+from src.modeling import save_model, train_and_compare
 
 
 def main() -> None:

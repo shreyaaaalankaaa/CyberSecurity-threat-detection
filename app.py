@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from pathlib import Path
 import json
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
 from src.data import FEATURE_COLUMNS, TARGET, generate_demo_dataset, validate_dataset
 from src.inference import predict_record
-from src.modeling import train_and_compare, save_model
+from src.modeling import save_model, train_and_compare
 
 st.set_page_config(page_title="Network Threat Detection", page_icon="🛡️", layout="wide")
 st.title("Network Threat Detection")
@@ -21,13 +22,21 @@ with st.sidebar:
     upload = st.file_uploader("CSV file", type="csv", disabled=source != "Upload CSV")
     st.info("The built-in dataset is synthetic and intended only for demonstrations. Use a recognized benchmark for formal evaluation.")
 
-try:
-    raw = generate_demo_dataset(samples) if source == "Built-in demonstration data" else (pd.read_csv(upload) if upload else None)
-    if raw is None:
-        st.info("Upload a CSV file to continue.")
+if source == "Built-in demonstration data":
+    raw = generate_demo_dataset(samples)
+elif upload is not None:
+    try:
+        raw = pd.read_csv(upload)
+    except (pd.errors.ParserError, pd.errors.EmptyDataError, UnicodeDecodeError) as exc:
+        st.error(f"Could not read the CSV file: {exc}")
         st.stop()
+else:
+    st.info("Upload a CSV file to continue.")
+    st.stop()
+
+try:
     df = validate_dataset(raw)
-except Exception as exc:
+except ValueError as exc:
     st.error(str(exc))
     st.stop()
 

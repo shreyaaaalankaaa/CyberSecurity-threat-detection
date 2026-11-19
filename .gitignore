@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 models/*.joblib
 artifacts/*.json
+*.egg-info/
