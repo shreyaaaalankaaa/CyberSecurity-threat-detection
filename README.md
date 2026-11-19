@@ -4,6 +4,11 @@ A reproducible machine-learning project for classifying network connections as n
 
 The built-in dataset is synthetic and is provided so the full workflow can be run without downloading external files. It should not be treated as a benchmark result. For formal evaluation, upload a compatible dataset derived from NSL-KDD, UNSW-NB15, CICIDS, or another documented intrusion-detection dataset.
 
+## Screenshots
+
+![Model comparison, confusion matrix and feature importance](docs/screenshots/threat-dashboard.png)
+*Model comparison, confusion matrix and feature importance*
+
 ## What this project demonstrates
 
 - A complete scikit-learn preprocessing pipeline for numeric and categorical features
